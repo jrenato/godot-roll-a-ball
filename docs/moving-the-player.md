@@ -66,47 +66,13 @@ func _process(delta: float) -> void:
 	pass
 ```
 
-The Unity tutorial then presents this code:
-
-```csharp
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class PlayerController : MonoBehaviour
-{
-    private Rigidbody rb;
-    private float movementX;
-    private float movementY;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    void OnMove(InputValue movementValue)
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        movementX = movementVector.x;
-        movementY = movementVector.y;
-    }
-
-    void FixedUpdate()
-    {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
-        rb.AddForce(movement);
-    }
-}
-```
+The Unity tutorial then added code to read player input and move the ball.
 
 A few considerations:
 
-* The script stores the `Rigidbody` component in a variable called `rb`. In Godot, the script is attached to the `RigidBody3D` node, so there's no need to store it in a variable. We can use `self` to refer to the node itself.
-* The `OnMove` method is called by the Input System package. In Godot, we can use the `_input` method to handle input events.
-* The `FixedUpdate` method is called by Unity every fixed framerate frame. In Godot, we can use the `_physics_process` method to handle physics updates. Also, just for the sake of completeness, there's also the Godot's `_process` and Unity's `Update` method, which are called every frame.
+* The Unity's script stores the `Rigidbody` component in a variable called `rb`. In Godot, the script is attached to the `RigidBody3D` node, so there's no need to store it in a variable. We can use `self` to refer to the node itself.
+* The `OnMove` method is called by the Input System package. In Godot, we can simply handle input events directly.
+* Unity's `FixedUpdate` method is called by Unity every fixed framerate frame. In Godot, we can use the `_physics_process` method to handle physics updates. Also, just for the sake of completeness, there's also the Godot's `_process` and Unity's `Update` method, which are called every frame.
 * The movement vector is created using the `movementX` and `movementY` variables. In Godot, we can use the `Input.get_axis` method to get the movement vector and store it directly in a Vector3 variable.
 
 A Godot version of the script would be something like this:
@@ -120,7 +86,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var input := Vector3.ZERO 
+	var input := Vector3.ZERO
+    # Input.get_axis returns a value between -1.0 and 1.0
 	input.x = Input.get_axis("move_left", "move_right") 
 	input.z = Input.get_axis("move_forward", "move_back") 
 
@@ -155,9 +122,44 @@ I was also easy to do:
 2. Click the Mesh menu
 3. Select `Create Trimesh Static Body`
 
-It'll create a `StaticBody3D` node with a `CollisionShape3D` node as children of the Ground node.
+It'll create a `StaticBody3D` node with a `CollisionShape3D` node as children of the Ground node. To keep things standard, I rearranged the nodes so that the `StaticBody3D` node is the Ground parent, and CollisionShape3D and MeshInstance3D are its children.
 
 Now, if I run the game, I can move the player around the scene using the WASD keys, and it has the same problem as the Unity version: it moves very slowly.
 
 ## Player movement speed
 
+The Unity tutorial adds a `speed` variable to the script and uses it to multiply the movement vector.
+
+```csharp
+(...)
+    public float speed = 0;
+(...)
+    rb.AddForce(movement * speed);
+(...)
+```
+
+In Godot, we can do the same thing:
+
+```gdscript
+extends RigidBody3D
+
+@export var speed: float = 10.0 # <-- Added this line
+
+func _ready() -> void:
+	pass
+
+
+func _process(delta: float) -> void:
+	var input := Vector3.ZERO 
+	input.x = Input.get_axis("move_left", "move_right") 
+	input.z = Input.get_axis("move_forward", "move_back") 
+
+	apply_central_force(input * speed) # <-- Changed this line
+```
+
+A few things to notice:
+
+* We added a default value to the `speed` variable. In the Unity version, the variable is initialized with `0`, but it's changed in the Inspector to `10`.
+* I added the `@export` keyword to the `speed` variable. This makes the variable visible in the Inspector, so we can change it without having to edit the script. Unity accomplishes the same thing by using the `public` keyword.
+
+Now, let's move on to the next step: [Moving the camera](moving-the-camera.md)
