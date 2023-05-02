@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcs7vf55bn8my"]
+[gd_scene load_steps=13 format=3 uid="uid://dcs7vf55bn8my"]
 
 [ext_resource type="PackedScene" uid="uid://drcdw1q5hgjer" path="res://levels/game_camera.tscn" id="1_h056d"]
 [ext_resource type="Material" uid="uid://cjc6hed63y6ra" path="res://materials/ground.tres" id="1_vgfc2"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="2_ysrin"]
 [ext_resource type="Material" uid="uid://cti2gfb4nbwn1" path="res://materials/wall.tres" id="4_pnnrh"]
+[ext_resource type="PackedScene" uid="uid://bsi1pyviau8rv" path="res://levels/collectible.tscn" id="5_fhwg8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8oxga"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -99,3 +100,6 @@ shape = SubResource("ConcavePolygonShape3D_boxyw")
 mesh = SubResource("BoxMesh_4l3ik")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_pnnrh")
+
+[node name="Collectible" parent="." instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 3, 0.5, 0)
