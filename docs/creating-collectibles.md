@@ -57,16 +57,20 @@ func tween_rotate_loop():
 
 The 5.0 is the duration of the animation in seconds.
 
-Unfortunately, both solutions resulted in an animation quite different from the Unity's tutorial. My guess for now is that it's a pivot point issue.
+Unfortunately, both solutions resulted in an animation quite different from the Unity's tutorial. My guess for now is that it might be a pivot point issue.
 
 I plan to research this issue in the future.
 
-## Pickup Detection
+## Instantiating Collectibles
 
-In Godot, the first decision is if I want it to have physics or not.
+The next two lessons in the Unity's tutorial are about making the Collectibles a Prefab and instantiating it in the scene.
 
-If I want it to have physics, I can use a `CharacterBody3D` or a `RigidBody3D`. The former is more appropriate, since I don't need it to have full physics, just to be able to collide with the player. The latter would more appropriate if I wanted it to be able to fall off the platform, for example.
+I understand that a Prefab is a way to reuse a set of nodes and their properties in multiple scenes, so I actually already did that when I extracted the Collectible into a separate scene in order to attach a script and animate it.
 
-But even so it feels like overkill. I don't need it to have physics, I just need it to be able to collide with the player. Not even that, I just need to be able to detect when the player is over or near it.
+That way, I can just more `Collectible` nodes to the scene and it will be just like the Unity's tutorial.
 
-So the best approach is to use an `Area3D` with a `CollisionShape3D` as a child, and a `SphereShape3D` to detect when the player is near it.
+But before that, the Unity's tutorial creates an Empty GameObject called `Pickup Parent` to hold all the Collectibles. I'll do the same using a `Node3D` called `Collectibles`.
+
+Then I'll duplicate some `Collectible` nodes as children of `Collectibles` and position just like in the Unity's tutorial. One thing I was happy to find out is that, just like the Unity's tutorial, I can change the viewport to see the scene from different angles using the view gizmo.
+
+Now I can proceed to [Detecting Collisions with Collectibles](detecting-collisions-with-collectibles.md).

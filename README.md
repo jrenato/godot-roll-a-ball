@@ -10,3 +10,5 @@ It's roughly based on the Unity Roll-a-Ball tutorial.
 * [Moving the player](docs/moving-the-player.md)
 * [Moving the camera](docs/moving-the-camera.md)
 * [Setting up the play area](docs/setting-up-the-play-area.md)
+* [Creating Collectibles](docs/creating-collectibles.md)
+* [Detecting Collisions with Collectibles](docs/detecting-collisions-with-collectibles.md)
