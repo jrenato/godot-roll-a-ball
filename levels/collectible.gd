@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends CharacterBody3D
 
 var rotation_vector : Vector3 = Vector3(15, 30, 45)
 

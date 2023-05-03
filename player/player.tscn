@@ -9,6 +9,8 @@
 
 [node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+max_contacts_reported = 3
+contact_monitor = true
 script = ExtResource("1_dudnf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

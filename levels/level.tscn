@@ -105,48 +105,36 @@ surface_material_override/0 = ExtResource("4_pnnrh")
 
 [node name="Collectible" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 7, 0.5, 0)
-skeleton = NodePath("../..")
 
 [node name="Collectible5" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 6, 0.5, -3.5)
-skeleton = NodePath("../..")
 
 [node name="Collectible8" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -6, 0.5, -3.5)
-skeleton = NodePath("../..")
 
 [node name="Collectible9" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -6, 0.5, 3.5)
-skeleton = NodePath("../..")
 
 [node name="Collectible12" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 6, 0.5, 3.5)
-skeleton = NodePath("../..")
 
 [node name="Collectible6" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 3.5, 0.5, -6)
-skeleton = NodePath("../..")
 
 [node name="Collectible7" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -3.5, 0.5, -6)
-skeleton = NodePath("../..")
 
 [node name="Collectible10" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -3.5, 0.5, 6)
-skeleton = NodePath("../..")
 
 [node name="Collectible11" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 3.5, 0.5, 6)
-skeleton = NodePath("../..")
 
 [node name="Collectible2" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -7, 0.5, 0)
-skeleton = NodePath("../..")
 
 [node name="Collectible3" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, 7)
-skeleton = NodePath("../..")
 
 [node name="Collectible4" parent="Collectibles" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, -7)
-skeleton = NodePath("../..")

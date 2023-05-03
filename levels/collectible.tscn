@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsi1pyviau8rv"]
+[gd_scene load_steps=5 format=3 uid="uid://bsi1pyviau8rv"]
 
 [ext_resource type="Material" uid="uid://osfbb5o4c8w8" path="res://materials/collectible.tres" id="1_hvmsf"]
 [ext_resource type="Script" path="res://levels/collectible.gd" id="2_a7ynr"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_r630t"]
+[sub_resource type="BoxMesh" id="BoxMesh_4r14n"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Collectible" type="MeshInstance3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_sp0ib"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Collectible" type="CharacterBody3D" groups=["collectibles"]]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0, 0)
-mesh = SubResource("BoxMesh_r630t")
-surface_material_override/0 = ExtResource("1_hvmsf")
+collision_layer = 0
 script = ExtResource("2_a7ynr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_4r14n")
+surface_material_override/0 = ExtResource("1_hvmsf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_sp0ib")
