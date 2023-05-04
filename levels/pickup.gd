@@ -1,13 +1,17 @@
 extends CharacterBody3D
 
-var rotation_vector : Vector3 = Vector3(15, 30, 45)
+var rotation_vector : Vector3 = Vector3(1, 1, 0)
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+
 
 func _ready() -> void:
 	pass
 #	tween_rotate_loop()
 
+
 func _process(delta: float) -> void:
-	rotation += rotation_vector * delta * 0.1
+	mesh_instance_3d.rotation += rotation_vector * delta
+
 
 #func tween_rotate_loop():
 #	var tween := create_tween()
