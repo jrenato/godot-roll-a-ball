@@ -38,11 +38,12 @@ And that's it for now.
 To end this section, I'll make a quick list, on the top of my head, of things I want to improve now, before adding new features:
 
 * Improve the `Pickup` animation, try to make it more similar to the Unity's one.
-* Refactor the way the `Pickup` collision is handled. I don't believe it needs to be a `CharacterBody3D` node.
 * Improve the lighting. It's certainly slightly brighter than the Unity's one.
+* Refactor the way the `Pickup` collision is handled. I don't believe it needs to be a `CharacterBody3D` node.
 
 After that, some of the things I want to do are:
 
+* Add camera controls.
 * Replace the `Ground` and `Walls` with a modular gridmap and expand the level.
 * Refactor the things I don't think belong to the `Player` script.
 * Add a pause menu with options to restart the game and exit the game.
