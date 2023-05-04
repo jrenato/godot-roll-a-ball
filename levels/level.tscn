@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://cjc6hed63y6ra" path="res://materials/ground.tres" id="1_vgfc2"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="2_ysrin"]
 [ext_resource type="Material" uid="uid://cti2gfb4nbwn1" path="res://materials/wall.tres" id="4_pnnrh"]
-[ext_resource type="PackedScene" uid="uid://bsi1pyviau8rv" path="res://levels/collectible.tscn" id="5_fhwg8"]
+[ext_resource type="PackedScene" uid="uid://bsi1pyviau8rv" path="res://levels/pickup.tscn" id="5_fhwg8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8oxga"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -101,40 +101,40 @@ mesh = SubResource("BoxMesh_4l3ik")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("4_pnnrh")
 
-[node name="Collectibles" type="Node3D" parent="."]
+[node name="Pickups" type="Node3D" parent="."]
 
-[node name="Collectible" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 7, 0.5, 0)
+[node name="Pickup" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 8, 0.5, 0)
 
-[node name="Collectible5" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 6, 0.5, -3.5)
+[node name="Pickup2" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -8, 0.5, 0)
 
-[node name="Collectible8" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -6, 0.5, -3.5)
+[node name="Pickup3" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, -8)
 
-[node name="Collectible9" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -6, 0.5, 3.5)
+[node name="Pickup4" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, 8)
 
-[node name="Collectible12" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 6, 0.5, 3.5)
+[node name="Pickup5" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 4, 0.5, 7)
 
-[node name="Collectible6" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 3.5, 0.5, -6)
+[node name="Pickup8" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -4, 0.5, 7)
 
-[node name="Collectible7" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -3.5, 0.5, -6)
+[node name="Pickup10" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -4, 0.5, -7)
 
-[node name="Collectible10" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -3.5, 0.5, 6)
+[node name="Pickup11" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 4, 0.5, -7)
 
-[node name="Collectible11" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 3.5, 0.5, 6)
+[node name="Pickup6" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 7, 0.5, 4)
 
-[node name="Collectible2" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -7, 0.5, 0)
+[node name="Pickup7" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -7, 0.5, 4)
 
-[node name="Collectible3" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, 7)
+[node name="Pickup9" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, -7, 0.5, -4)
 
-[node name="Collectible4" parent="Collectibles" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0.5, -7)
+[node name="Pickup12" parent="Pickups" instance=ExtResource("5_fhwg8")]
+transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 7, 0.5, -4)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsi1pyviau8rv"]
 
-[ext_resource type="Material" uid="uid://osfbb5o4c8w8" path="res://materials/collectible.tres" id="1_hvmsf"]
-[ext_resource type="Script" path="res://levels/collectible.gd" id="2_a7ynr"]
+[ext_resource type="Script" path="res://levels/pickup.gd" id="1_fctsy"]
+[ext_resource type="Material" uid="uid://osfbb5o4c8w8" path="res://materials/pickup.tres" id="2_l7u87"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4r14n"]
 size = Vector3(0.5, 0.5, 0.5)
@@ -9,14 +9,14 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sp0ib"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Collectible" type="CharacterBody3D" groups=["collectibles"]]
+[node name="Pickup" type="CharacterBody3D" groups=["pickups"]]
 transform = Transform3D(0.853553, -0.146447, 0.5, 0.5, 0.5, -0.707107, -0.146447, 0.853553, 0.5, 0, 0, 0)
 collision_layer = 0
-script = ExtResource("2_a7ynr")
+script = ExtResource("1_fctsy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_4r14n")
-surface_material_override/0 = ExtResource("1_hvmsf")
+surface_material_override/0 = ExtResource("2_l7u87")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sp0ib")

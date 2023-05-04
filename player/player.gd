@@ -16,10 +16,8 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body : Node) -> void:
-	if body.is_in_group("collectibles"):
+	if body.is_in_group("pickups"):
 		body.queue_free()
-	if body.is_in_group("test"):
-		print(body)
 
 
 #func _physics_process(delta: float) -> void:
