@@ -14,3 +14,33 @@ It's roughly based on the Unity Roll-a-Ball tutorial.
 * [Detecting Collisions with Collectibles](docs/detecting-collisions-with-collectibles.md)
 * [Displaying Score and Text](docs/displaying-score-and-text.md)
 * [Building the Game](docs/building-the-game.md)
+
+## To Do
+
+### Top Priorities
+
+- [x] Improve the `Pickup` animation, try to make it more similar to the Unity's one. (details [here](docs/improvements.md#pickup-animation))
+- [x] Improve the lighting. It's certainly slightly brighter than the Unity's one. (details [here](docs/improvements.md#improving-the-lighting))
+- [ ] Refactor the way the `Pickup` collect is handled. (details [here](docs/improvements.md#refactoring-the-pickup-collect))
+
+### Medium Priorities
+
+- [ ] Add camera controls.
+- [ ] Replace the `Ground` and `Walls` with a modular gridmap and expand the level.
+- [ ] Add a pause menu with options to restart the game and exit the game.
+- [ ] Add an win/lose screen with options to restart and exit the game.
+- [ ] Have the `Player` be destroyed when it falls off the level.
+- [ ] Add another type of pickup.
+- [ ] Add a `Tween` to the `Player` when it's destroyed.
+- [ ] Add a `Tween` to the `Pickup` when it's collected.
+- [ ] Add sounds.
+
+### Low Priorities
+
+- [ ] Refactor the things I don't think belong to the `Player` script.
+- [ ] Add a main and settings menu.
+- [ ] Add a level selection menu and create more levels.
+- [ ] Add state to the game, keeping track of the collected pickups and the time it took to complete the level.
+- [ ] Add a `Coil` object that launches the player in the air, and create levels that uses it.
+- [ ] Use the modular gridmap to create a maze, and create walls that can destroy the player.
+- [ ] Also, create destructible walls that can be destroyed by the player.

@@ -34,31 +34,3 @@ A few notes:
 * I enabled the `Embed PCK` option. If there's any problem with this, I'll disable it and rebuild it.
 
 And that's it for now.
-
-To end this section, I'll make a quick list, on the top of my head, of things I want to improve now, before adding new features:
-
-* Improve the `Pickup` animation, try to make it more similar to the Unity's one.
-* Improve the lighting. It's certainly slightly brighter than the Unity's one.
-* Refactor the way the `Pickup` collision is handled. I don't believe it needs to be a `CharacterBody3D` node.
-
-After that, some of the things I want to do are:
-
-* Add camera controls.
-* Replace the `Ground` and `Walls` with a modular gridmap and expand the level.
-* Refactor the things I don't think belong to the `Player` script.
-* Add a pause menu with options to restart the game and exit the game.
-* Add an win/lose screen with options to restart and exit the game.
-* Have the `Player` be destroyed when it falls off the level.
-* Add another type of pickup.
-* Add a `Tween` to the `Player` when it's destroyed.
-* Add a `Tween` to the `Pickup` when it's collected.
-* Add sounds.
-
-Things that I'll probably not have enough time to do, but I might try in the future:
-
-* Add a main and settings menu.
-* Add a level selection menu and create more levels.
-* Add state to the game, keeping track of the collected pickups and the time it took to complete the level.
-* Add a `Coil` object that launches the player in the air, and create levels that uses it.
-* Use the modular gridmap to create a maze, and create walls that can destroy the player.
-* Also, create destructible walls that can be destroyed by the player.
