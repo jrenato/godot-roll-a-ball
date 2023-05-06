@@ -97,7 +97,7 @@ func _process(delta):
 
 It works! The camera rotates around the player, and the player can look up and down a bit.
 
-But there's a problem. The camera rotates around the player, but the direction the player is moved is always the same. The problem is in this liune of code:
+But as I mentioned before, there's a problem. The camera rotates around the player, but the direction the player is moved is always the same. The problem is in this liune of code:
 
 _player.gd_
 ```gdscript
