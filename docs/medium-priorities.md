@@ -108,7 +108,7 @@ func _process(delta: float) -> void:
 
 The apply_central_force() only takes into account the direction of the input, not the direction the player - or the camera - is facing.
 
-Bramwell's provided a solution for it using the `twist_pivot.basis`:
+Bramwell's provided a solution for it using the [twist_pivot.basis](https://docs.godotengine.org/en/latest/classes/class_node3d.html#class-node3d-property-basis):
 
 ```gdscript
 # Bramwell's solution
