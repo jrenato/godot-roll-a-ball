@@ -6,14 +6,19 @@ extends RigidBody3D
 
 @onready var pickup_area_3d: Area3D = $PickupArea3D
 
+var game_camera : Node3D
+
 var count : int
 var total_pickups : int
 
 
 func _ready() -> void:
+	game_camera = get_parent().get_node("GameCamera")
+
 	pickup_area_3d.area_entered.connect(_on_area_entered)
 	count = 0
 	total_pickups = get_tree().get_nodes_in_group("pickups").size()
+
 	set_count_text()
 	if win_label:
 		win_label.visible = false
@@ -24,7 +29,7 @@ func _process(delta: float) -> void:
 	input.x = Input.get_axis("move_left", "move_right") 
 	input.z = Input.get_axis("move_forward", "move_back") 
 
-	apply_central_force(input * speed)
+	apply_central_force(game_camera.twist_pivot.basis * input * speed)
 
 
 func _input(event : InputEvent) -> void:

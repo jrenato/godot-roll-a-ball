@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dcs7vf55bn8my"]
 
-[ext_resource type="PackedScene" uid="uid://drcdw1q5hgjer" path="res://levels/game_camera.tscn" id="1_h056d"]
+[ext_resource type="PackedScene" uid="uid://cj6vdaacylqfa" path="res://levels/game_camera.tscn" id="1_h056d"]
 [ext_resource type="Material" uid="uid://cjc6hed63y6ra" path="res://materials/ground.tres" id="1_vgfc2"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="2_ysrin"]
 [ext_resource type="Material" uid="uid://cti2gfb4nbwn1" path="res://materials/wall.tres" id="4_pnnrh"]
@@ -42,10 +42,10 @@ light_color = Color(0.784314, 0.784314, 0.784314, 1)
 light_energy = 0.5
 shadow_enabled = true
 
+[node name="Player" parent="." instance=ExtResource("2_ysrin")]
+
 [node name="GameCamera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_h056d")]
 player = NodePath("../Player")
-
-[node name="Player" parent="." instance=ExtResource("2_ysrin")]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
