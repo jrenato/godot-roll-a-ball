@@ -4,11 +4,16 @@ extends RigidBody3D
 @export var count_label: Label
 @export var win_label: Label
 
+@onready var pickup_area_3d: Area3D = $PickupArea3D
+
 var count : int
+var total_pickups : int
+
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	pickup_area_3d.area_entered.connect(_on_area_entered)
 	count = 0
+	total_pickups = get_tree().get_nodes_in_group("pickups").size()
 	set_count_text()
 	if win_label:
 		win_label.visible = false
@@ -35,11 +40,11 @@ func set_count_text() -> void:
 	if not win_label:
 		return
 
-	if count >= 12:
+	if count >= total_pickups:
 		win_label.visible = true
 
 
-func _on_body_entered(body : Node) -> void:
+func _on_area_entered(body : Node) -> void:
 	if body.is_in_group("pickups"):
 		count += 1
 		set_count_text()

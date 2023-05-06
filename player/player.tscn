@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnxvofx5vjmby"]
+[gd_scene load_steps=6 format=3 uid="uid://cnxvofx5vjmby"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dudnf"]
 [ext_resource type="Material" uid="uid://dpnacu1hhralj" path="res://materials/ball.tres" id="1_i5x6m"]
@@ -6,6 +6,8 @@
 [sub_resource type="SphereMesh" id="SphereMesh_bvkl0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cvgg8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uc2fx"]
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("count_label", "win_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -22,6 +24,11 @@ surface_material_override/0 = ExtResource("1_i5x6m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_cvgg8")
+
+[node name="PickupArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea3D"]
+shape = SubResource("SphereShape3D_uc2fx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

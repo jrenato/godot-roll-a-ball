@@ -17,12 +17,18 @@ It's roughly based on the Unity Roll-a-Ball tutorial.
 
 ## To Do
 
-### Top Priorities
+### Improvements
 
 - [x] Improve the `Pickup` animation, try to make it more similar to the Unity's one. (details [here](docs/improvements.md#pickup-animation))
-- [x] Improve the lighting. It's certainly slightly brighter than the Unity's one. (details [here](docs/improvements.md#improving-the-lighting))
-- [ ] Refactor the way the `Pickup` collect is handled. (details [here](docs/improvements.md#refactoring-the-pickup-collect))
+- [x] Improve the lighting. It's certainly brighter than the Unity's one. (details [here](docs/improvements.md#improving-the-lighting))
+- [x] Refactor the way the `Pickup` collect is handled. (details [here](docs/improvements.md#refactoring-the-pickup-collect))
+- [x] Refactor the way the win condition is handled. (details [here](docs/improvements.md#refactoring-the-win-condition))
 
+So I consider this build to be the first version of the game, and I'll call it `v1.0.0`, since it's very close to the Unity's one, with just a few improvements and tweaks.
+
+It can be downloaded [here](https://github.com/jrenato/godot-roll-a-ball/releases/tag/1.0.0).
+
+After this, I'll start working on the next improvements:
 ### Medium Priorities
 
 - [ ] Add camera controls.

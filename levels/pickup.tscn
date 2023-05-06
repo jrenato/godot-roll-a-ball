@@ -9,8 +9,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_sp0ib"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="Pickup" type="CharacterBody3D" groups=["pickups"]]
-collision_layer = 0
+[node name="Pickup" type="Area3D" groups=["pickups"]]
 script = ExtResource("1_fctsy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
