@@ -259,8 +259,8 @@ It works? Yes. Is it good enough? No. I don't like the fact that the whole scene
 
 It would be much better if the player just respawned at the start of the level, without the scene reloading. The camera could just smoothly move back to the start of the level, and the player would keep the pickups it had collected.
 
-Since it'll involve adding logic to the level itself, I'll do it in the future. Perhaps adding `Player Lives` as well, so the player can have a few tries before having to restart the level.
+Since it'll involve adding logic to the level itself, I'll implement this idea in the future. Perhaps adding `Player Lives` as well, so the player can have a few tries before having to restart the level.
 
-Anyway, an easier way to improve this situation is to add a "Game Over" message when the player falls from the level, with an option to restart the level.
+For now, there's an easier way to improve this situation: adding a "Game Over" message when the player falls from the level, with an option to restart the level or quit the game.
 
-I already have a "You Win!" message, so I'll just add a "You Lose!" message as well, and include a "Restart" button in both messages.
+I already have a "You Win!" message, so I'll just add a "You Lose!" message as well, and include buttons to "Restart" and "Quit". I also remember that I'll have to deal with the mouse cursor again, since I always hide it when the game starts.
