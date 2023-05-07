@@ -9,13 +9,11 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uc2fx"]
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("count_label", "win_label")]
+[node name="Player" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource("1_dudnf")
-count_label = NodePath("CanvasLayer/MarginContainer/CountLabel")
-win_label = NodePath("CanvasLayer/MarginContainer2/WinLabel")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_bvkl0")
@@ -26,6 +24,7 @@ surface_material_override/0 = ExtResource("1_i5x6m")
 shape = SubResource("SphereShape3D_cvgg8")
 
 [node name="PickupArea3D" type="Area3D" parent="."]
+unique_name_in_owner = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea3D"]
 shape = SubResource("SphereShape3D_uc2fx")
@@ -43,6 +42,9 @@ theme_override_constants/margin_bottom = 20
 [node name="CountLabel" type="Label" parent="CanvasLayer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 24
 text = "Count Label"
 
@@ -58,12 +60,43 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_top = 150
 
-[node name="WinLabel" type="Label" parent="CanvasLayer/MarginContainer2"]
+[node name="MessageLabel" type="Label" parent="CanvasLayer/MarginContainer2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_font_sizes/font_size = 32
-text = "You Win!"
+text = "Message!"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 150
+
+[node name="MenuVBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/MarginContainer3/MenuVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Restart"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/MarginContainer3/MenuVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Quit"

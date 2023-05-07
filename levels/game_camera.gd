@@ -13,7 +13,6 @@ var offset : Vector3
 
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if player:
 		offset = global_position - player.global_position
 

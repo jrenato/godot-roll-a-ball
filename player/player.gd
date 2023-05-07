@@ -1,27 +1,38 @@
 extends RigidBody3D
 
 @export var speed: float = 10.0
-@export var count_label: Label
-@export var win_label: Label
 
-@onready var pickup_area_3d: Area3D = $PickupArea3D
+@onready var count_label: Label = %CountLabel
+@onready var message_label: Label = %MessageLabel
+@onready var menu_container: VBoxContainer = %MenuVBoxContainer
+@onready var restart_button: Button = %RestartButton
+@onready var quit_button: Button = %QuitButton
+
+@onready var pickup_area_3d: Area3D = %PickupArea3D
 
 var game_camera : Node3D
+var spawn_position : Vector3
 
 var count : int
 var total_pickups : int
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	restart_button.pressed.connect(_on_restart_button_pressed)
+	quit_button.pressed.connect(_on_quit_button_pressed)
+
 	game_camera = get_parent().get_node("GameCamera")
+	spawn_position = position
 
 	pickup_area_3d.area_entered.connect(_on_area_entered)
 	count = 0
 	total_pickups = get_tree().get_nodes_in_group("pickups").size()
 
 	set_count_text()
-	if win_label:
-		win_label.visible = false
+
+	message_label.visible = false
+	menu_container.visible = false
 
 
 func _process(delta: float) -> void:
@@ -42,11 +53,9 @@ func set_count_text() -> void:
 		return
 	count_label.text = "Count: %s" % count
 
-	if not win_label:
-		return
-
 	if count >= total_pickups:
-		win_label.visible = true
+		message_label.text = "You Win!"
+		message_label.visible = true
 
 
 func _on_area_entered(body : Node) -> void:
@@ -55,9 +64,21 @@ func _on_area_entered(body : Node) -> void:
 		set_count_text()
 		body.queue_free()
 
+	if body.is_in_group("death_areas"):
+		message_label.text = "You Lose!"
+		message_label.visible = true
+		menu_container.visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		freeze = true
 
-#func _physics_process(delta: float) -> void:
-#	var bodies : Array[Node3D] = get_colliding_bodies()
-#	for body in bodies:
-#		if body.is_in_group("collectibles"):
-#			body.queue_free()
+
+func _on_restart_button_pressed() -> void:
+		message_label.visible = false
+		menu_container.visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		position = spawn_position
+		freeze = false
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()

@@ -264,3 +264,72 @@ Since it'll involve adding logic to the level itself, I'll implement this idea i
 For now, there's an easier way to improve this situation: adding a "Game Over" message when the player falls from the level, with an option to restart the level or quit the game.
 
 I already have a "You Win!" message, so I'll just add a "You Lose!" message as well, and include buttons to "Restart" and "Quit". I also remember that I'll have to deal with the mouse cursor again, since I always hide it when the game starts.
+
+So, to start, I renamed "WinLabel" to "MessageLabel", since it'll be used for both "You Win!" and "You Lose!" messages.
+
+Next I added another `MarginContainer` node as a child of the root node, a `VBoxContainer` node as a child of it, and two buttons to the `VBoxContainer` node, one for "Restart" and another for "Quit".
+
+The Player scenetree now looks like this:
+
+![Player SceneTree](images/player_restart_scenetree.png)
+
+For this new `MarginContainer` node, I set the `Anchors Presets` to `Center Bottom` and `Margin Bottom` to `150`.
+
+On the `VBoxContainer` I set the Custom Minimum Size to 150 x 0 and Separation to 10.
+
+Then it's time to update the `player.gd` script.
+
+First, I added the references to the new nodes that I'll need:
+
+```gdscript
+@onready var message_label: Label = %MessageLabel # Previously WinLabel
+@onready var menu_container: VBoxContainer = %MenuVBoxContainer
+@onready var restart_button: Button = %RestartButton
+@onready var quit_button: Button = %QuitButton
+```
+
+Next I have to hide the menu_container just like I hide the message_label when the game starts:
+
+```gdscript
+func _ready() -> void:
+	(...)
+	message_label.visible = false
+	menu_container.visible = false
+```
+
+I had to update the set_count_text method as well:
+
+```gdscript
+func set_count_text() -> void:
+	(...)
+	if count >= total_pickups:
+		message_label.text = "You Win!"
+		message_label.visible = true
+```
+
+Now there's a new issue: I need to display the menu_container and lose message_label when the player falls from the level, but it's the DeathArea node that detects the collision, not the Player node.
+
+So I obliterated the `DeathArea` script, included the DeathArea scene to the "death_areas" group, and added the following code to the `player.gd` script:
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	(...)
+	if body.is_in_group("death_areas"):
+		message_label.text = "You Lose!"
+		message_label.visible = true
+		menu_container.visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		freeze = true
+```
+
+On moment to consider that last line, `freeze = true`.
+
+First I tried to pause the entire game, using `get_tree().paused = true`, but it paused everything. Even pressing "Esc" to quit the game didn't work anymore.
+
+Reading the docs I found out that I could set the "Process Mode" of the Player node to "Always" to be able to exit or click the buttons, but then it would be pointless to pause the game at all, since the player would still endlessly fall from the level.
+
+Then I read about [freeze](https://docs.godotengine.org/en/latest/classes/class_rigidbody3d.html#class-rigidbody3d-property-freeze): _If true, the body is frozen. Gravity and forces are not applied anymore_
+
+That's exactly what I need. I just want to freeze the player in place, so it doesn't fall from the level anymore. I don't want to pause the game, just freeze the player.
+
+TODO: document restart and quit buttons logic and the spawn_point dilemma

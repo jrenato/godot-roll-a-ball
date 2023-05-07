@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnawtbw7kwju7"]
+[gd_scene format=3 uid="uid://cnawtbw7kwju7"]
 
-[ext_resource type="Script" path="res://levels/death_area.gd" id="1_6novg"]
-
-[node name="DeathArea" type="Area3D"]
-script = ExtResource("1_6novg")
+[node name="DeathArea" type="Area3D" groups=["death_areas"]]
