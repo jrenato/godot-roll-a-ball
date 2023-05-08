@@ -1,14 +1,34 @@
 Suggestions checklist:
 
-- [ ] You learned how to create objects to make your play area (floors and walls). Try to add more objects to your project.
-  - [x] Make a more interesting level (_Added gridmap_)
-  - [ ] Add obstacles
-  - [ ] New collectibles
+* You learned how to create objects to make your play area (floors and walls).
+  * Try to add more objects to your project
+    - [ ] Ramps
+  * Make a more interesting level
+    - [x] MeshLibrary and Gridmap
+  * Add obstacles
+    - [ ] Damaging Wall and Floor
+  * New collectibles
+    - [ ] Orbs for extra lives
 
-- [x] You learned how to use triggers to collect items. Try using them to trigger something else (_Added DeathArea_)
+* You learned how to use triggers to collect items.
+  * Try using them to trigger something else
+    - [x] DeathArea
 
-- [ ] You learned how to make the ball move. Try making it move differently. Try making something else move.
+* You learned how to make the ball move.
+  * Try making it move differently
+    - [ ] Coils
+  * Try making something else move
+    - [ ] Moving platform
 
-- [x] You learned how to add UI elements. Try adding additional UI screens, text, or information. (_Added "You Lose" screen and buttons_)
+* You learned how to add UI elements.
+  * Try adding additional UI screens, text, or information.
+    - [x] "You Lose" screen and buttons for restart and quit
 
-- [ ] You learned to use many of the tools/techniques in Unity. Try using those tools to add something new or different to your project, to demonstrate your comprehension.
+* You learned to use many of the tools/techniques in Unity.
+  * Try using those tools to add something new or different to your project, to demonstrate your comprehension.
+    - [ ] Main Menu
+    - [ ] Pause Menu
+    - [ ] Death, Respawn and Lives management
+    - [ ] Aditional levels with Level Selection Screen
+    - [ ] Animate pickup collected and player death
+    - [ ] Sounds

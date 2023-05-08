@@ -47,6 +47,7 @@ After this, I'll start working on the next improvements:
 - [ ] Add a main and settings menu.
 - [ ] Add a level selection menu and create more levels.
 - [ ] Add state to the game, keeping track of the collected pickups and the time it took to complete the level.
-- [ ] Add a `Coil` object that launches the player in the air, and create levels that uses it.
-- [ ] Use the modular gridmap to create a maze, and create walls that can destroy the player.
-- [ ] Also, create destructible walls that can be destroyed by the player.
+- [ ] Add a `Ramp` to create verticality on level design
+- [ ] Add a `Coil` object that launches the player in the air for more verticality
+- [ ] Damaging Walls and Floors that can destroy the player.
+- [ ] Destructible walls
