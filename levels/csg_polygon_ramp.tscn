@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dym34ly3l7u0r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvfl4"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_op8fy"]
+
+[node name="CSGPolygonRamp" type="CSGPolygon3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+use_collision = true
+polygon = PackedVector2Array(0, 0, 0, 0.05, 4, 2.05, 4, 0)
+
+[node name="18441" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1e-05)
+material_override = SubResource("StandardMaterial3D_rvfl4")
+mesh = SubResource("ImmediateMesh_op8fy")
