@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcs7vf55bn8my"]
+[gd_scene load_steps=12 format=3 uid="uid://dcs7vf55bn8my"]
 
 [ext_resource type="PackedScene" uid="uid://cj6vdaacylqfa" path="res://levels/game_camera.tscn" id="1_h056d"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="2_ysrin"]
@@ -21,6 +21,8 @@ background_mode = 2
 sky = SubResource("Sky_i71ll")
 tonemap_mode = 2
 glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_16dkx"]
 
 [node name="Level" type="Node3D"]
 
@@ -194,6 +196,9 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [node name="DeathArea" parent="." instance=ExtResource("5_jwoly")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathArea"]
+shape = SubResource("WorldBoundaryShape3D_16dkx")
 
 [node name="Ramps" type="Node3D" parent="."]
 

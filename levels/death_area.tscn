@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnawtbw7kwju7"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qmlvu"]
+[gd_scene format=3 uid="uid://cnawtbw7kwju7"]
 
 [node name="DeathArea" type="Area3D" groups=["death_areas"]]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("WorldBoundaryShape3D_qmlvu")
