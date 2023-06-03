@@ -22,8 +22,8 @@ func _ready() -> void:
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
-	game_camera = get_parent().get_node("GameCamera")
 	spawn_position = position
+	game_camera = get_parent().get_node("GameCamera")
 
 	pickup_area_3d.area_entered.connect(_on_area_entered)
 	count = 0
@@ -76,8 +76,8 @@ func _on_restart_button_pressed() -> void:
 		message_label.visible = false
 		menu_container.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		position = spawn_position
 		freeze = false
+		position = spawn_position
 
 
 func _on_quit_button_pressed() -> void:

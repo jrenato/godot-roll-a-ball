@@ -257,9 +257,9 @@ Reloading the whole scene when the player falls from the level is a very, very s
 
 It works? Yes. Is it good enough? No. I don't like the fact that the whole scene is immediately reloaded. It's not a very good user experience. The camera just snaps back abruptly to the start of the level. It feels like a hack, not a feature.
 
-It would be much better if the player just respawned at the start of the level, without the scene reloading. The camera could just smoothly move back to the start of the level, and the player would keep the pickups it had collected.
+It would be much better if the player just respawned at the start of the level, without the scene reloading. The camera could just move smoothly back to the start of the level and the player would keep the pickups it had collected.
 
-Since it'll involve adding logic to the level itself, I'll implement this idea in the future. Perhaps adding `Player Lives` as well, so the player can have a few tries before having to restart the level.
+Since it'll involve adding logic to the level itself, I'll implement this idea in the future. Perhaps adding `Player Lives` as well, so the player can have a few tries before having to restart the level entirely.
 
 For now, there's an easier way to improve this situation: adding a "Game Over" message when the player falls from the level, with an option to restart the level or quit the game.
 
@@ -322,14 +322,60 @@ func _on_area_entered(body : Node) -> void:
 		freeze = true
 ```
 
-On moment to consider that last line, `freeze = true`.
+One moment to consider that last line, `freeze = true`.
 
-First I tried to pause the entire game, using `get_tree().paused = true`, but it paused everything. Even pressing "Esc" to quit the game didn't work anymore.
+First I tried to pause the entire game using `get_tree().paused = true`, but it paused everything. I mean `everything`: pressing "Esc" to quit the game didn't work anymore.
 
-Reading the docs I found out that I could set the "Process Mode" of the Player node to "Always" to be able to exit or click the buttons, but then it would be pointless to pause the game at all, since the player would still endlessly fall from the level.
+Reading the docs I found out that I could set the "Process Mode" of the Player node to "Always" to be able to click the buttons and exit, but then it would be pointless to pause the game at all, since the player would still endlessly fall from the level.
 
 Then I read about [freeze](https://docs.godotengine.org/en/latest/classes/class_rigidbody3d.html#class-rigidbody3d-property-freeze): _If true, the body is frozen. Gravity and forces are not applied anymore_
 
 That's exactly what I need. I just want to freeze the player in place, so it doesn't fall from the level anymore. I don't want to pause the game, just freeze the player.
 
-TODO: document restart and quit buttons logic and the spawn_point dilemma
+Next, I added the `_on_restart_pressed` and `_on_quit_pressed` methods:
+
+```gdscript
+(...)
+func _on_restart_button_pressed() -> void:
+		message_label.visible = false
+		menu_container.visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		freeze = false
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().quit()
+```
+
+I also connected the `pressed` signal of the buttons to the methods on _ready():
+
+```gdscript
+func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	restart_button.pressed.connect(_on_restart_button_pressed)
+	quit_button.pressed.connect(_on_quit_button_pressed)
+(...)
+```
+
+Next I had to find a way to reposition the player at the start of the level.
+
+It was actually very simple. First I needed to store the initial position of the player in a variable:
+
+```gdscript
+var spawn_position : Vector3
+(...)
+
+func _ready() -> void:
+(...)
+	spawn_position = position
+```
+
+Then I just had to set the position of the player to the spawn_position when the restart button is pressed:
+
+```gdscript
+func _on_restart_button_pressed() -> void:
+	(...)
+	position = spawn_position
+```
+
+And that's it. The player now respawns at the start of the level when the restart button is pressed. It's not as polished as I'd like, but it's good enough for now.
