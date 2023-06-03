@@ -2,7 +2,7 @@ Suggestions checklist:
 
 * You learned how to create objects to make your play area (floors and walls).
   * Try to add more objects to your project
-    - [ ] Ramps
+    - [x] Ramps
   * Make a more interesting level
     - [x] MeshLibrary and Gridmap
   * Add obstacles
@@ -16,7 +16,7 @@ Suggestions checklist:
 
 * You learned how to make the ball move.
   * Try making it move differently
-    - [ ] Coils
+    - [x] Coils
   * Try making something else move
     - [ ] Moving platform
 
@@ -28,7 +28,8 @@ Suggestions checklist:
   * Try using those tools to add something new or different to your project, to demonstrate your comprehension.
     - [ ] Main Menu
     - [ ] Pause Menu
-    - [ ] Death, Respawn and Lives management
+    - [x] Death and Respawn
+    - [ ] Lives and Game Over
     - [ ] Aditional levels with Level Selection Screen
     - [ ] Animate pickup collected and player death
     - [ ] Sounds

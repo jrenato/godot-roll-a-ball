@@ -13,7 +13,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 use_collision = true
 polygon = PackedVector2Array(0, 0, 0, 0.05, 4, 2.05, 4, 0)
 
-[node name="18441" type="MeshInstance3D" parent="."]
+[node name="RampMeshInstance" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1e-05)
 material_override = SubResource("StandardMaterial3D_rvfl4")
 mesh = SubResource("ImmediateMesh_op8fy")

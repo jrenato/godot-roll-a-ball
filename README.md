@@ -34,7 +34,7 @@ After this, I'll start working on the next improvements:
 - [x] Add camera controls (details [here](docs/medium-priorities.md#camera-controls))
 - [x] Replace the `Ground` and `Walls` with a modular gridmap and expand the level (details [here](docs/medium-priorities.md#modular-gridmap))
 - [x] Have the `Player` be destroyed when it falls off the level (details [here](docs/medium-priorities.md#player-death-and-respawn))
-- [ ] Add an win/lose screen with options to restart and exit the game. (details [here](docs/medium-priorities.md#losing-and-restarting-the-level))
+- [x] Add an win/lose screen with options to restart and exit the game. (details [here](docs/medium-priorities.md#losing-and-restarting-the-level))
 - [ ] Add a pause menu with options to restart the game and exit the game.
 - [ ] Add another type of pickup.
 - [ ] Add a `Tween` to the `Player` when it's destroyed.
@@ -47,7 +47,7 @@ After this, I'll start working on the next improvements:
 - [ ] Add a main and settings menu.
 - [ ] Add a level selection menu and create more levels.
 - [ ] Add state to the game, keeping track of the collected pickups and the time it took to complete the level.
-- [ ] Add a `Ramp` to create verticality on level design
-- [ ] Add a `Coil` object that launches the player in the air for more verticality
+- [x] Add a `Ramp` to create verticality on level design (details [here](docs/low-priorities.md#add-a-ramp-to-create-verticality-on-level-design))
+- [x] Add a `Coil` object that launches the player in the air for more verticality (details [here](docs/low-priorities.md#add-a-coil-object-that-launches-the-player-in-the-air-for-more-verticality))
 - [ ] Damaging Walls and Floors that can destroy the player.
 - [ ] Destructible walls
