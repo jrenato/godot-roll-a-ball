@@ -29,8 +29,6 @@ func _process(delta: float) -> void:
 	camera_input.x = Input.get_axis("move_camera_right", "move_camera_left")
 	camera_input.z = Input.get_axis("move_camera_back", "move_camera_forward")
 
-	print(camera_input)
-
 	if twist_input == 0 and camera_input.x != 0:
 		twist_input = camera_input.x * camera_sensitivity
 
