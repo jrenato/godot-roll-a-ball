@@ -409,3 +409,53 @@ func _process(delta: float) -> void:
 If twist_input and pitch_input are 0, then the gamepad is probably being used to rotate the camera. If they're not 0, then the mouse is being used to rotate the camera.
 
 TODO: Add gamepad support for menus
+
+## Animate Pickup Collected
+
+To add a little bit of polish to the game, I decided to animate the pickups when they're collected.
+
+To keep things simple, I decided to use the `Tween` node to animate the scale of the pickup.
+
+First I added a tween_capture method to the `player.gd` script:
+
+```gdscript
+func tween_capture(body : Node) -> void:
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(body, "global_position", self.global_position, 0.2)#\
+		#.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(body, "scale", Vector3.ZERO, 0.2)
+	tween.set_parallel(false)
+	tween.tween_callback(body.queue_free)
+```
+
+Next I updated the `_on_area_entered` method to call the tween_capture method:
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	if body.is_in_group("pickups"):
+		count += 1
+		set_count_text()
+		tween_capture(body)
+		# body.queue_free() # <-- this is no longer needed, it's called by the tween
+```
+
+And that's it. The pickups now animate when they're collected.
+
+## Improve Pickup Visuals
+
+I decided to improve the visuals of the pickups by adding a glow effect.
+
+I just added a `OmniLight3D` node to the `pickup.tscn` scene, and set the following properties:
+
+![Pickup OmniLight3D](images/pickup_glow.png)
+
+Another thing I wanted was to have particles around the pickups, so I added a `GPUParticles3D` node to the `pickup.tscn` scene, and set the following properties:
+
+- Increased the `Amount` to 16
+- Set `Draw Passes` 1 to a `SphereMesh`
+- Set a Material to the `SphereMesh`:
+- ![Pickup GPUParticles3D](images/pickup_particle_material.png)
+- Set a Process Material to the `GPUParticles3D`:
+- ![Pickup GPUParticles3D](images/pickup_particle_process_material.png)
+
+And that pretty much did it. The pickups now have a nice glow effect and particles around them.

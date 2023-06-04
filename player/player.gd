@@ -51,18 +51,28 @@ func _input(event : InputEvent) -> void:
 func set_count_text() -> void:
 	if not count_label:
 		return
-	count_label.text = "Count: %s" % count
+	count_label.text = "Remaining: %s" % (total_pickups - count)
 
 	if count >= total_pickups:
 		message_label.text = "You Win!"
 		message_label.visible = true
 
 
+func tween_capture(body : Node) -> void:
+	var tween := create_tween().set_parallel(true)
+	tween.tween_property(body, "global_position", self.global_position, 0.2)#\
+		#.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(body, "scale", Vector3.ZERO, 0.2)
+	tween.set_parallel(false)
+	tween.tween_callback(body.queue_free)
+
+
 func _on_area_entered(body : Node) -> void:
 	if body.is_in_group("pickups"):
 		count += 1
 		set_count_text()
-		body.queue_free()
+		tween_capture(body)
+		#body.queue_free()
 
 	if body.is_in_group("death_areas"):
 		message_label.text = "You Lose!"

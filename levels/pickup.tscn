@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsi1pyviau8rv"]
+[gd_scene load_steps=10 format=3 uid="uid://bsi1pyviau8rv"]
 
 [ext_resource type="Script" path="res://levels/pickup.gd" id="1_fctsy"]
 [ext_resource type="Material" uid="uid://osfbb5o4c8w8" path="res://materials/pickup.tres" id="2_l7u87"]
@@ -8,6 +8,32 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sp0ib"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="Curve" id="Curve_75vu2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.472727), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xa5ks"]
+curve = SubResource("Curve_75vu2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m5ni1"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 1, 0)
+tangential_accel_min = 0.5
+tangential_accel_max = 0.5
+scale_min = 0.03
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_xa5ks")
+color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iw3g"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.47451, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ojwrg"]
+material = SubResource("StandardMaterial3D_1iw3g")
 
 [node name="Pickup" type="Area3D" groups=["pickups"]]
 script = ExtResource("1_fctsy")
@@ -19,3 +45,13 @@ surface_material_override/0 = ExtResource("2_l7u87")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_sp0ib")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 16
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_m5ni1")
+draw_pass_1 = SubResource("SphereMesh_ojwrg")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 1, 0, 1)
+light_energy = 0.5
