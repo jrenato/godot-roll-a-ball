@@ -32,6 +32,7 @@ After this, I'll start working on the next improvements:
 ### Medium Priorities
 
 - [x] Add camera controls (details [here](docs/medium-priorities.md#camera-controls))
+- [ ] Add support for Gamepad (details [here](docs/medium-priorities.md#gamepad-support))
 - [x] Replace the `Ground` and `Walls` with a modular gridmap and expand the level (details [here](docs/medium-priorities.md#modular-gridmap))
 - [x] Have the `Player` be destroyed when it falls off the level (details [here](docs/medium-priorities.md#player-death-and-respawn))
 - [x] Add an win/lose screen with options to restart and exit the game. (details [here](docs/medium-priorities.md#losing-and-restarting-the-level))

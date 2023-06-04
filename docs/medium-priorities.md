@@ -379,3 +379,33 @@ func _on_restart_button_pressed() -> void:
 ```
 
 And that's it. The player now respawns at the start of the level when the restart button is pressed. It's not as polished as I'd like, but it's good enough for now.
+
+## Gamepad Support
+
+First thing I did was to add new input actions for the gamepad:
+
+![Input Actions](images/gamepad_input_actions_camera.png)
+
+Next I updated the `game_camera.gd` script to use the gamepad:
+
+```gdscript
+func _process(delta: float) -> void:
+	(...)
+	var camera_input := Vector3.ZERO 
+	camera_input.x = Input.get_axis("move_camera_right", "move_camera_left")
+	camera_input.z = Input.get_axis("move_camera_back", "move_camera_forward")
+
+	if twist_input == 0 and camera_input.x != 0:
+		twist_input = camera_input.x * camera_sensitivity
+
+	if pitch_input == 0 and camera_input.z != 0:
+		pitch_input = camera_input.z * camera_sensitivity
+
+	twist_pivot.rotate_y(twist_input)
+	pitch_pivot.rotate_x(pitch_input)
+	(...)
+```
+
+If twist_input and pitch_input are 0, then the gamepad is probably being used to rotate the camera. If they're not 0, then the mouse is being used to rotate the camera.
+
+TODO: Add gamepad support for menus
