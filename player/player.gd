@@ -62,7 +62,7 @@ func tween_capture(body : Node) -> void:
 	var tween := create_tween().set_parallel(true)
 	tween.tween_property(body, "global_position", self.global_position, 0.2)#\
 		#.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
-	tween.tween_property(body, "scale", Vector3.ZERO, 0.2)
+	tween.tween_property(body, "scale", Vector3.ONE * 0.01, 0.2)
 	tween.set_parallel(false)
 	tween.tween_callback(body.queue_free)
 
