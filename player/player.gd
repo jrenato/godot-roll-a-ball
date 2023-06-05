@@ -6,6 +6,8 @@ extends RigidBody3D
 @onready var message_label: Label = %MessageLabel
 @onready var menu_container: VBoxContainer = %MenuVBoxContainer
 @onready var restart_button: Button = %RestartButton
+@onready var continue_button: Button = %ContinueButton
+@onready var next_level_button: Button = %NextLevelButton
 @onready var quit_button: Button = %QuitButton
 
 @onready var pickup_area_3d: Area3D = %PickupArea3D
@@ -20,6 +22,7 @@ var total_pickups : int
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	restart_button.pressed.connect(_on_restart_button_pressed)
+	continue_button.pressed.connect(_on_continue_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
 	spawn_position = position
@@ -33,6 +36,7 @@ func _ready() -> void:
 
 	message_label.visible = false
 	menu_container.visible = false
+	next_level_button.visible = false
 
 
 func _process(delta: float) -> void:
@@ -54,8 +58,28 @@ func set_count_text() -> void:
 	count_label.text = "Remaining: %s" % (total_pickups - count)
 
 	if count >= total_pickups:
-		message_label.text = "You Win!"
-		message_label.visible = true
+		set_victory_screen()
+
+
+func set_victory_screen() -> void:
+	message_label.text = "You Win!"
+	message_label.visible = true
+	menu_container.visible = true
+	next_level_button.visible = true
+	continue_button.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
+	quit_button.grab_focus()
+
+
+func set_defeat_screen() -> void:
+	message_label.text = "You Lose!"
+	message_label.visible = true
+	menu_container.visible = true
+	next_level_button.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
+	continue_button.grab_focus()
 
 
 func tween_capture(body : Node) -> void:
@@ -72,22 +96,21 @@ func _on_area_entered(body : Node) -> void:
 		count += 1
 		set_count_text()
 		tween_capture(body)
-		#body.queue_free()
 
 	if body.is_in_group("death_areas"):
-		message_label.text = "You Lose!"
-		message_label.visible = true
-		menu_container.visible = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		freeze = true
+		set_defeat_screen()
 
 
 func _on_restart_button_pressed() -> void:
-		message_label.visible = false
-		menu_container.visible = false
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		freeze = false
-		position = spawn_position
+	get_tree().reload_current_scene()
+
+
+func _on_continue_button_pressed() -> void:
+	message_label.visible = false
+	menu_container.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	freeze = false
+	position = spawn_position
 
 
 func _on_quit_button_pressed() -> void:
