@@ -10,7 +10,9 @@ extends RigidBody3D
 @onready var next_level_button: Button = %NextLevelButton
 @onready var quit_button: Button = %QuitButton
 
-@onready var pickup_area_3d: Area3D = %PickupArea3D
+@onready var mesh_instance: MeshInstance3D = %MeshInstance3D
+@onready var death_particles: GPUParticles3D = %DeathParticles3D
+@onready var pickup_area: Area3D = %PickupArea3D
 
 var game_camera : Node3D
 var spawn_position : Vector3
@@ -28,7 +30,7 @@ func _ready() -> void:
 	spawn_position = position
 	game_camera = get_parent().get_node("GameCamera")
 
-	pickup_area_3d.area_entered.connect(_on_area_entered)
+	pickup_area.area_entered.connect(_on_area_entered)
 	count = 0
 	total_pickups = get_tree().get_nodes_in_group("pickups").size()
 
@@ -73,6 +75,9 @@ func set_victory_screen() -> void:
 
 
 func set_defeat_screen() -> void:
+	rotation = Vector3.ZERO
+	mesh_instance.visible = false
+	death_particles.emitting = true
 	message_label.text = "You Lose!"
 	message_label.visible = true
 	menu_container.visible = true
@@ -106,6 +111,7 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
+	mesh_instance.visible = true
 	message_label.visible = false
 	menu_container.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

@@ -32,5 +32,5 @@ Suggestions checklist:
     - [ ] Lives and Game Over
     - [ ] Aditional levels with Level Selection Screen
     - [x] Animate pickup collected
-    - [ ] Animate player death
+    - [x] Animate player death
     - [ ] Sounds

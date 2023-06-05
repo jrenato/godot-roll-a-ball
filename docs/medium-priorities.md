@@ -459,3 +459,7 @@ Another thing I wanted was to have particles around the pickups, so I added a `G
 - ![Pickup GPUParticles3D](images/pickup_particle_process_material.png)
 
 And that pretty much did it. The pickups now have a nice glow effect and particles around them.
+
+## Animate Player Death
+
+TODO: Explain how a GPU Particles System was added and triggered when the player dies

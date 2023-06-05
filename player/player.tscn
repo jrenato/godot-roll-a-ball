@@ -1,7 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnxvofx5vjmby"]
+[gd_scene load_steps=11 format=3 uid="uid://cnxvofx5vjmby"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_dudnf"]
 [ext_resource type="Material" uid="uid://dpnacu1hhralj" path="res://materials/ball.tres" id="1_i5x6m"]
+[ext_resource type="Material" uid="uid://d20tsdvphvtw8" path="res://materials/ball_spark.tres" id="2_0rxro"]
+
+[sub_resource type="Curve" id="Curve_nedhc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.354545), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6wnt1"]
+curve = SubResource("Curve_nedhc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ji4jl"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(1, 1, 1)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_6wnt1")
+color = Color(0.529412, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wh28q"]
+material = ExtResource("2_0rxro")
 
 [sub_resource type="SphereMesh" id="SphereMesh_bvkl0"]
 
@@ -16,7 +38,17 @@ max_contacts_reported = 3
 contact_monitor = true
 script = ExtResource("1_dudnf")
 
+[node name="DeathParticles3D" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ji4jl")
+draw_pass_1 = SubResource("SphereMesh_wh28q")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
 mesh = SubResource("SphereMesh_bvkl0")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_i5x6m")
