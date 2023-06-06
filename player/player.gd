@@ -23,6 +23,9 @@ var total_pickups : int
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	body_entered.connect(_on_body_entered)
+
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	continue_button.pressed.connect(_on_continue_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
@@ -94,6 +97,12 @@ func tween_capture(body : Node) -> void:
 	tween.tween_property(body, "scale", Vector3.ONE * 0.01, 0.2)
 	tween.set_parallel(false)
 	tween.tween_callback(body.queue_free)
+
+
+func _on_body_entered(body):
+	print(body.name)
+	if body.is_in_group("damage"):
+		print("Damage!")
 
 
 func _on_area_entered(body : Node) -> void:
