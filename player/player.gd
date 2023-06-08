@@ -45,7 +45,6 @@ func _ready() -> void:
 
 	message_label.visible = false
 	menu_container.visible = false
-	next_level_button.visible = false
 
 
 func _process(delta: float) -> void:

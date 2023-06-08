@@ -462,7 +462,31 @@ And that pretty much did it. The pickups now have a nice glow effect and particl
 
 ## Animate Player Death
 
-TODO: Explain how a GPU Particles System was added and triggered when the player dies
+To put it simply, I just added a `GPUParticles3D` node to the `player.tscn` scene, and managed both it's emitting property and the ball's visibility.
+
+Two key differences from the `Pickup` particles are the properties `One Shot` and `Explosiveness`. The first prevents the Particles animation from repeating, and the seconds spawns all the particles at once.
+
+After that, I just enable to particles on death, hide the ball mesh and reset the ball rotation.
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	(...)
+	if body.is_in_group("death_areas"):
+		rotation = Vector3.ZERO # <- To ensure the particles are in the correct direction
+		mesh_instance.visible = false
+		death_particles.emitting = true
+		(...)
+```
+
+Finally, on the `_on_continue_button_pressed`, we also need to display the ball mesh again.
+
+```gdscript
+func _on_continue_button_pressed() -> void:
+	mesh_instance.visible = true
+	(...)
+```
+
+This is a nice hack, but still a hack. After creating a proper spawn system, many of these things won't be needed.
 
 ## Adding a Pause Menu
 
