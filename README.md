@@ -29,6 +29,7 @@ So I consider this build to be the first version of the game, and I'll call it `
 It can be downloaded [here](https://github.com/jrenato/godot-roll-a-ball/releases/tag/1.0.0).
 
 After this, I'll start working on the next improvements:
+
 ### Medium Priorities
 
 - [x] Add camera controls (details [here](docs/medium-priorities.md#camera-controls))
@@ -36,7 +37,7 @@ After this, I'll start working on the next improvements:
 - [x] Replace the `Ground` and `Walls` with a modular gridmap and expand the level (details [here](docs/medium-priorities.md#modular-gridmap))
 - [x] Have the `Player` be destroyed when it falls off the level (details [here](docs/medium-priorities.md#player-death-and-respawn))
 - [x] Add an win/lose screen with options to restart and exit the game. (details [here](docs/medium-priorities.md#losing-and-restarting-the-level))
-- [ ] Add a pause menu with options to restart the game and exit the game.
+- [x] Add a pause menu with options to restart the game and exit the game. (details [here](docs/medium-priorities.md#adding-a-pause-menu))
 - [ ] Add another type of pickup.
 - [x] Add visual effects to the `Player` when it's destroyed. (details [here](docs/medium-priorities.md#animate-player-death))
 - [x] Add visual effects to the `Pickup` when it's collected. (details [here](docs/medium-priorities.md#animate-pickup-collected))

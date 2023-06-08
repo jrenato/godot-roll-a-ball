@@ -5,6 +5,7 @@ extends RigidBody3D
 @onready var count_label: Label = %CountLabel
 @onready var message_label: Label = %MessageLabel
 @onready var menu_container: VBoxContainer = %MenuVBoxContainer
+
 @onready var restart_button: Button = %RestartButton
 @onready var continue_button: Button = %ContinueButton
 @onready var next_level_button: Button = %NextLevelButton
@@ -19,6 +20,9 @@ var spawn_position : Vector3
 
 var count : int
 var total_pickups : int
+
+var player_dead : bool = false
+var last_velocity : Vector3 = Vector3.ZERO
 
 
 func _ready() -> void:
@@ -54,7 +58,9 @@ func _process(delta: float) -> void:
 
 func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+		# get_tree().quit()
+		last_velocity = linear_velocity
+		set_pause_screen()
 
 
 func set_count_text() -> void:
@@ -70,24 +76,54 @@ func set_victory_screen() -> void:
 	message_label.text = "You Win!"
 	message_label.visible = true
 	menu_container.visible = true
+
+	restart_button.visible = true
 	next_level_button.visible = true
 	continue_button.visible = false
+	quit_button.visible = true
+
+	# next_level_button.grab_focus()
+	quit_button.grab_focus()
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	freeze = true
-	quit_button.grab_focus()
 
 
 func set_defeat_screen() -> void:
+	# Death Animation
 	rotation = Vector3.ZERO
 	mesh_instance.visible = false
 	death_particles.emitting = true
+
 	message_label.text = "You Lose!"
 	message_label.visible = true
 	menu_container.visible = true
+
+	restart_button.visible = true
 	next_level_button.visible = false
+	continue_button.visible = true
+	quit_button.visible = true
+
+	continue_button.grab_focus()
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	freeze = true
+
+
+func set_pause_screen() -> void:
+	message_label.text = "Paused"
+	message_label.visible = true
+	menu_container.visible = true
+
+	restart_button.visible = true
+	next_level_button.visible = false
+	continue_button.visible = true
+	quit_button.visible = true
+
 	continue_button.grab_focus()
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
 
 
 func tween_capture(body : Node) -> void:
@@ -112,6 +148,7 @@ func _on_area_entered(body : Node) -> void:
 		tween_capture(body)
 
 	if body.is_in_group("death_areas"):
+		player_dead = true
 		set_defeat_screen()
 
 
@@ -123,9 +160,16 @@ func _on_continue_button_pressed() -> void:
 	mesh_instance.visible = true
 	message_label.visible = false
 	menu_container.visible = false
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	freeze = false
-	position = spawn_position
+
+	if player_dead:
+		position = spawn_position
+		player_dead = false
+	else:
+		linear_velocity = last_velocity
+		last_velocity = Vector3.ZERO
 
 
 func _on_quit_button_pressed() -> void:

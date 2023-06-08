@@ -463,3 +463,160 @@ And that pretty much did it. The pickups now have a nice glow effect and particl
 ## Animate Player Death
 
 TODO: Explain how a GPU Particles System was added and triggered when the player dies
+
+## Adding a Pause Menu
+
+It was actually very simple. The planned `Pause Screen` was just a variation of the `Defeat Screen` that I already had.
+
+To better organize the code, I created three new methods:
+
+```gdscript
+func set_victory_screen() -> void:
+	message_label.text = "You Win!"
+	message_label.visible = true
+	menu_container.visible = true
+
+	restart_button.visible = true
+	next_level_button.visible = true
+	continue_button.visible = false
+	quit_button.visible = true
+
+	quit_button.grab_focus()
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
+
+
+func set_defeat_screen() -> void:
+	# Death Animation
+	rotation = Vector3.ZERO
+	mesh_instance.visible = false
+	death_particles.emitting = true
+
+	message_label.text = "You Lose!"
+	message_label.visible = true
+	menu_container.visible = true
+
+	restart_button.visible = true
+	next_level_button.visible = false
+	continue_button.visible = true
+	quit_button.visible = true
+
+	continue_button.grab_focus()
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
+
+
+func set_pause_screen() -> void:
+	message_label.text = "Paused"
+	message_label.visible = true
+	menu_container.visible = true
+
+	restart_button.visible = true
+	next_level_button.visible = false
+	continue_button.visible = true
+	quit_button.visible = true
+
+	continue_button.grab_focus()
+
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	freeze = true
+```
+
+I know there's a lot of duplicated code. I plan to refactor it later, when I separate the `HUD` into its own scene.
+
+Next I updated the code to call the new methods. First the `set_count_text` method:
+
+```gdscript
+func set_count_text() -> void:
+	if not count_label:
+		return
+	count_label.text = "Remaining: %s" % (total_pickups - count)
+
+	if count >= total_pickups:
+		set_victory_screen() # <-- call the new method
+```
+
+Then the `_on_area_entered` method:
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	if body.is_in_group("pickups"):
+		count += 1
+		set_count_text()
+		tween_capture(body)
+
+	if body.is_in_group("death_areas"):
+		set_defeat_screen() # <-- call the new method
+```
+
+Then I updated the `_input` method. Instead of quitting the game, I now call the `set_pause_screen` method:
+
+```gdscript
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		# get_tree().quit()
+		set_pause_screen() # <-- call the new method
+```
+
+But now there are two problems:
+
+1. Pressing the `Continue` button resets the player's position, even if the player didn't die.
+2. Unpausing the game resets the player's velocity, due to the `freeze` variable.
+
+To address these issues, we need to change a few things on the `_on_continue_pressed` method. We need a way to know if the player died or not, and also store the player's velocity before pausing the game.
+
+First we add two new variables to the `player.gd` script:
+
+```gdscript
+(...)
+var player_dead : bool = false
+var last_velocity : Vector3 = Vector3.ZERO
+(...)
+func _ready() -> void:
+(...)
+```
+
+Then we update the `_on_area_entered` method to set the `player_dead` variable to `true`:
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	if body.is_in_group("pickups"):
+		count += 1
+		set_count_text()
+		tween_capture(body)
+
+	if body.is_in_group("death_areas"):
+		player_dead = true # <-- set the new variable
+		set_defeat_screen()
+```
+
+Then we update the `_input` method to store the player's velocity before pausing the game:
+
+```gdscript
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		# get_tree().quit()
+		last_velocity = linear_velocity # <-- store the player's velocity
+		set_pause_screen()
+```
+
+Then we update the `_on_continue_pressed` method to check if the player died or not, and restore the player's velocity if needed:
+
+```gdscript
+func _on_continue_button_pressed() -> void:
+	(...)
+	freeze = false
+
+	if player_dead:
+		position = spawn_position
+		player_dead = false
+	else:
+		linear_velocity = last_velocity
+		last_velocity = Vector3.ZERO # <-- reset the variable, just to be sure
+```
+
+And that's it. The pause menu is now working as expected.
+
+It's a little hacky, but it works. I plan to refactor it later, when I separate the `HUD` into its own scene. With a proper respawn system, both the `player_dead` and `last_velocity` variables will be obsolete (we won't use `freeze` anymore).

@@ -27,7 +27,7 @@ Suggestions checklist:
 * You learned to use many of the tools/techniques in Unity.
   * Try using those tools to add something new or different to your project, to demonstrate your comprehension.
     - [ ] Main Menu
-    - [ ] Pause Menu
+    - [x] Pause Menu
     - [x] Death and Respawn
     - [ ] Lives and Game Over
     - [ ] Aditional levels with Level Selection Screen
