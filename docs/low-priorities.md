@@ -42,3 +42,27 @@ The `trigger` and `rearm` animations are very simple, and basically mirror each 
 ![Coil](images/coil_triggered.png)
 
 Finally, the `Player` is launched in the air by using `apply_central_force` on the `body` parameter of the `_on_body_entered` function, multiplying the `Vector3.UP` by the `force` property.
+
+## Damaging Walls and Floors
+
+I copied the floor and wall meshes (and their respective StaticBodies and CollisionShapes) from the tileset to two new scenes, `DamageFloor` and `DamageWall`, and added a `CollisionShape` to each of them.
+
+First I considered to add the DeathArea to them to detect when the player enters the area, but that meant that the player's PickupArea would trigger the death (through `_on_area_entered`), not the Rigidbody itself (through `_on_body_entered`). Since the PickupArea has a bigger CollisionShape than the Rigidbody, it resulted in the player dying before even touching the damage floor and wall.
+
+Instead, I kept them as just StaticBodies and added them to a new group named `damage`.
+
+Then, I connected the player's `body_entered` signal to a new function, `_on_body_entered`, and checked if the body that entered was in the `damage` group.
+
+```gdscript
+func _ready() -> void:
+	(...)
+	body_entered.connect(_on_body_entered)
+	(...)
+
+func _on_body_entered(body):
+	if body.is_in_group("damage"):
+		player_dead = true
+		set_defeat_screen()
+```
+
+And with that, the player dies when touching the damage floor and wall.

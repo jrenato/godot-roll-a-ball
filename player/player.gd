@@ -28,8 +28,6 @@ var last_velocity : Vector3 = Vector3.ZERO
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	body_entered.connect(_on_body_entered)
-
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	continue_button.pressed.connect(_on_continue_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
@@ -37,6 +35,7 @@ func _ready() -> void:
 	spawn_position = position
 	game_camera = get_parent().get_node("GameCamera")
 
+	body_entered.connect(_on_body_entered)
 	pickup_area.area_entered.connect(_on_area_entered)
 	count = 0
 	total_pickups = get_tree().get_nodes_in_group("pickups").size()
@@ -134,12 +133,6 @@ func tween_capture(body : Node) -> void:
 	tween.tween_callback(body.queue_free)
 
 
-func _on_body_entered(body):
-	print(body.name)
-	if body.is_in_group("damage"):
-		print("Damage!")
-
-
 func _on_area_entered(body : Node) -> void:
 	if body.is_in_group("pickups"):
 		count += 1
@@ -147,6 +140,12 @@ func _on_area_entered(body : Node) -> void:
 		tween_capture(body)
 
 	if body.is_in_group("death_areas"):
+		player_dead = true
+		set_defeat_screen()
+
+
+func _on_body_entered(body):
+	if body.is_in_group("damage"):
 		player_dead = true
 		set_defeat_screen()
 
@@ -165,6 +164,7 @@ func _on_continue_button_pressed() -> void:
 
 	if player_dead:
 		position = spawn_position
+		linear_velocity = Vector3.ZERO
 		player_dead = false
 	else:
 		linear_velocity = last_velocity

@@ -6,7 +6,7 @@ Suggestions checklist:
   * Make a more interesting level
     - [x] MeshLibrary and Gridmap
   * Add obstacles
-    - [ ] Damaging Wall and Floor
+    - [x] Damaging Wall and Floor
   * New collectibles
     - [ ] Orbs for extra lives
 

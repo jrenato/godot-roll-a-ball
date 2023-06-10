@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://buhf0vw8rv2ag"]
+
+[ext_resource type="Material" uid="uid://cwcs23yo6s6iq" path="res://materials/damage_surface.tres" id="1_pfjjy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tjggu"]
+size = Vector3(2, 2.2, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ruowj"]
+data = PackedVector3Array(-1, 1.1, 1, 1, 1.1, 1, -1, -1.1, 1, 1, 1.1, 1, 1, -1.1, 1, -1, -1.1, 1, 1, 1.1, -1, -1, 1.1, -1, 1, -1.1, -1, -1, 1.1, -1, -1, -1.1, -1, 1, -1.1, -1, 1, 1.1, 1, 1, 1.1, -1, 1, -1.1, 1, 1, 1.1, -1, 1, -1.1, -1, 1, -1.1, 1, -1, 1.1, -1, -1, 1.1, 1, -1, -1.1, -1, -1, 1.1, 1, -1, -1.1, 1, -1, -1.1, -1, 1, 1.1, 1, -1, 1.1, 1, 1, 1.1, -1, -1, 1.1, 1, -1, 1.1, -1, 1, 1.1, -1, -1, -1.1, 1, 1, -1.1, 1, -1, -1.1, -1, 1, -1.1, 1, 1, -1.1, -1, -1, -1.1, -1)
+
+[node name="DamageWall" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = SubResource("BoxMesh_tjggu")
+surface_material_override/0 = ExtResource("1_pfjjy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["damage"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ruowj")
