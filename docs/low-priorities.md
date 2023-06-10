@@ -112,3 +112,80 @@ Adding it to the level was simple: all I had to do was add a `MovingPlatform` to
 
 ![Moving Platform](images/moving_platform_path.png)
 _(The path is the light purple line)_
+
+
+## Pause other objects
+
+One thing that started bothering me was that the `MovingPlatform` was moving even when the game was paused. I wanted to pause it too.
+
+The correct way to fix that is to actually use the `pause` feature of the Godot Engine. Unfortunately, that won't be possible for now, since the UI is embedded in the player scene, what means that the player and the uil will be paused at the same time, what's undesirable.
+
+For now, I just need another small hack. Another one, I know. I'll definitely need to refactor and clean up a lot of code later.
+
+What's possible for now is to just add a custom signal to let the moving platform know when the game is paused, and then pause the animation.
+
+So I created an `autoload` folder and created a `signals.gd` file inside it. Then I added a `signal game_paused` to it.
+
+```gdscript
+extends Node
+
+signal game_paused(paused : bool)
+```
+
+The parameter `paused` is a boolean that indicates if the game is paused or not.
+
+To use this new, custom signal, I opened the `Autoload` tab in the `Project Settings` and added the `signals.gd` file to it.
+
+![Autoload](images/autoload_signals.png)
+
+The first thing I needed was to have the player emit the signal when the game is paused or unpaused. So I added the following code to the `Player` script:
+
+```gdscript
+func set_victory_screen() -> void:
+	Signals.game_paused.emit(true)
+	(...)
+func set_defeat_screen() -> void:
+	Signals.game_paused.emit(true)
+	(...)
+func set_pause_screen() -> void:
+	Signals.game_paused.emit(true)
+	(...)
+func _on_continue_button_pressed() -> void:
+	Signals.game_paused.emit(false)
+	(...)
+```
+
+To have the `MovingPlatform` listen to the signal, I added the following code to its script:
+
+```gdscript
+func _ready():
+	Signals.game_paused.connect(_on_game_paused)
+	(...)
+
+func _on_game_paused(paused : bool) -> void:
+	if paused:
+		animation_player.pause()
+	else:
+		animation_player.play()
+```
+
+Since most of the work is already done, I also paused the `Pickup` idle animation when the game is paused, and resumed it when the game is unpaused.
+
+```gdscript
+(...)
+var paused_animation : bool = false
+
+func _ready():
+	Signals.game_paused.connect(_on_game_paused)
+
+func _process(delta: float) -> void:
+	if not paused_animation:
+		mesh_instance_3d.rotate_object_local(Vector3(1, 0, 0), 1 * delta * rotation_speed)
+		mesh_instance_3d.rotate_object_local(Vector3(0, 1, 0), 2 * delta * rotation_speed)
+		mesh_instance_3d.rotate_object_local(Vector3(0, 0, 1), 3 * delta * rotation_speed)
+
+func _on_game_paused(paused : bool) -> void:
+	paused_animation = paused
+```
+
+And that's it. The `MovingPlatform` and the `Pickup` animations are now paused when the game is paused.

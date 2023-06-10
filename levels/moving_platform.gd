@@ -14,5 +14,13 @@ extends Path3D
 
 
 func _ready():
+	Signals.game_paused.connect(_on_game_paused)
 	if not Engine.is_editor_hint():
 		animation_player.speed_scale = speed / curve.get_baked_length()
+
+
+func _on_game_paused(paused : bool) -> void:
+	if paused:
+		animation_player.pause()
+	else:
+		animation_player.play()

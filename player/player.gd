@@ -71,6 +71,8 @@ func set_count_text() -> void:
 
 
 func set_victory_screen() -> void:
+	Signals.game_paused.emit(true)
+
 	message_label.text = "You Win!"
 	message_label.visible = true
 	menu_container.visible = true
@@ -88,6 +90,8 @@ func set_victory_screen() -> void:
 
 
 func set_defeat_screen() -> void:
+	Signals.game_paused.emit(true)
+
 	# Death Animation
 	rotation = Vector3.ZERO
 	mesh_instance.visible = false
@@ -109,6 +113,8 @@ func set_defeat_screen() -> void:
 
 
 func set_pause_screen() -> void:
+	Signals.game_paused.emit(true)
+
 	message_label.text = "Paused"
 	message_label.visible = true
 	menu_container.visible = true
@@ -155,6 +161,8 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
+	Signals.game_paused.emit(false)
+
 	mesh_instance.visible = true
 	message_label.visible = false
 	menu_container.visible = false
