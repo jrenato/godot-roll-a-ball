@@ -53,4 +53,5 @@ After this, I'll start working on the next improvements:
 - [x] Add a `Ramp` to create verticality on level design (details [here](docs/low-priorities.md#add-a-ramp-to-create-verticality-on-level-design))
 - [x] Add a `Coil` object that launches the player in the air for more verticality (details [here](docs/low-priorities.md#add-a-coil-object-that-launches-the-player-in-the-air-for-more-verticality))
 - [x] Damaging Walls and Floors that can destroy the player. (details [here](docs/low-priorities.md#damaging-walls-and-floors))
+- [x] Add Moving platforms (details [here](docs/low-priorities.md#moving-platforms))
 - [ ] Destructible walls

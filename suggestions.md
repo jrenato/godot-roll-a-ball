@@ -18,7 +18,7 @@ Suggestions checklist:
   * Try making it move differently
     - [x] Coils
   * Try making something else move
-    - [ ] Moving platform
+    - [x] Moving platforms
 
 * You learned how to add UI elements.
   * Try adding additional UI screens, text, or information.
