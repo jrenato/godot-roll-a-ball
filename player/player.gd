@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var speed: float = 10.0
 
 @onready var count_label: Label = %CountLabel
+@onready var lives_label = %LivesLabel
 @onready var message_label: Label = %MessageLabel
 @onready var menu_container: VBoxContainer = %MenuVBoxContainer
 
@@ -21,6 +22,7 @@ var spawn_position : Vector3
 var count : int
 var total_pickups : int
 
+var lives : int = 3
 var player_dead : bool = false
 var last_velocity : Vector3 = Vector3.ZERO
 
@@ -41,6 +43,7 @@ func _ready() -> void:
 	total_pickups = get_tree().get_nodes_in_group("pickups").size()
 
 	set_count_text()
+	set_lives_text()
 
 	message_label.visible = false
 	menu_container.visible = false
@@ -68,6 +71,12 @@ func set_count_text() -> void:
 
 	if count >= total_pickups:
 		set_victory_screen()
+
+
+func set_lives_text() -> void:
+	if not lives_label:
+		return
+	lives_label.text = "Lives: %s" % (lives)
 
 
 func set_victory_screen() -> void:
@@ -103,7 +112,13 @@ func set_defeat_screen() -> void:
 
 	restart_button.visible = true
 	next_level_button.visible = false
-	continue_button.visible = true
+
+	if lives > 0:
+		continue_button.visible = true
+	else:
+		continue_button.visible = false
+		continue_button.disabled = true
+
 	quit_button.visible = true
 
 	continue_button.grab_focus()
@@ -161,6 +176,13 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
+	if lives <= 0:
+		return
+
+	lives -= 1
+
+	set_lives_text()
+
 	Signals.game_paused.emit(false)
 
 	mesh_instance.visible = true

@@ -29,7 +29,7 @@ Suggestions checklist:
     - [ ] Main Menu
     - [x] Pause Menu
     - [x] Death and Respawn
-    - [ ] Lives and Game Over
+    - [x] Lives and Game Over
     - [ ] Aditional levels with Level Selection Screen
     - [x] Animate pickup collected
     - [x] Animate player death

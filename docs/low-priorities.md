@@ -189,3 +189,67 @@ func _on_game_paused(paused : bool) -> void:
 ```
 
 And that's it. The `MovingPlatform` and the `Pickup` animations are now paused when the game is paused.
+
+## Add Lives to the Player
+
+For starters, I duplicated the `MarginContainer` that contained the `CountLabel`, and renamed it's label to `LivesLabel`. Then I aligned it to the right of the screen.
+
+In the player script, I created a reference to the `LivesLabel` and added a `lives` property to the player.
+
+```gdscript
+@onready var lives_label = %LivesLabel
+
+(...)
+
+var lives : int = 3
+```
+
+Then I added a function to update the `LivesLabel`:
+
+```gdscript
+func set_lives_text() -> void:
+	if not lives_label:
+		return
+	lives_label.text = "Lives: %s" % (lives)
+```
+
+I called that new method in the `_ready` function:
+
+```gdscript
+func _ready():
+	(...)
+	set_lives_text()
+	(...)
+```
+
+I wanted to update the lives count not when the player dies, but when the player decides to continue, "consuming" one life. 
+
+So I needed to update the `_on_continue_button_pressed` method:
+
+```gdscript
+func _on_continue_button_pressed() -> void:
+	if lives <= 0:
+		return
+
+	lives -= 1
+
+	set_lives_text()
+	(...)
+```
+
+If the player has no lives left, the method just returns. Otherwise, it decreases the lives count by one, updates the `LivesLabel` and then proceeds as before.
+
+Another important change is regarding the continue button when the player dies. I wanted the continue button to be disabled when the player has no lives left, so I updated the following code to the `set_defeat_screen` method:
+
+```gdscript
+func set_defeat_screen() -> void:
+	(...)
+	next_level_button.visible = false
+
+	if lives > 0:
+		continue_button.visible = true
+	else:
+		continue_button.visible = false
+		continue_button.disabled = true
+	(...)
+```
