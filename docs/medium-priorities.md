@@ -245,7 +245,7 @@ func _on_body_entered(body : Node3D) -> void:
 
 For now, I'll just reload the current scene when the player enters the `DeathArea`. I'll add the respawn logic later.
 
-Then I went back to the Level scene and added a `CollisionShape` node as a child of the `DeathArea` node. I set it as a 200.0 x 1.0 x 200.0 BoxShape. Yes, it's a very big box, but it's just a placeholder for now. I can fine tune it later.
+Then I went back to the Level scene and added a `CollisionShape` node as a child of the `DeathArea` node. I set it as `WorldBoundaryShape3D`. According to the [docs](https://docs.godotengine.org/en/latest/classes/class_worldboundaryshape3d.html), it works like an infinite plane, and can be used for endless flat floors. Perfect.
 
 Finally, I moved the `DeathArea` node a little bit below the level, setting it's transform to `0.0 x -7.0 x 0.0`.
 
