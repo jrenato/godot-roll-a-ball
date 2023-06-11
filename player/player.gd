@@ -22,6 +22,7 @@ var spawn_position : Vector3
 var count : int
 var total_pickups : int
 
+var game_is_paused : bool = false
 var lives : int = 3
 var player_dead : bool = false
 var last_velocity : Vector3 = Vector3.ZERO
@@ -60,8 +61,13 @@ func _process(delta: float) -> void:
 func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		# get_tree().quit()
-		last_velocity = linear_velocity
-		set_pause_screen()
+		if not game_is_paused and not player_dead:
+			game_is_paused = true
+			last_velocity = linear_velocity
+			set_pause_screen()
+		elif not player_dead:
+			game_is_paused = false
+			resume_game()
 
 
 func set_count_text() -> void:
@@ -181,6 +187,10 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
+	resume_game()
+
+
+func resume_game() -> void:
 	Signals.game_paused.emit(false)
 
 	mesh_instance.visible = true
