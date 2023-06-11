@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://b55i8aqt1iaul"]
 
-[ext_resource type="Script" path="res://levels/life.gd" id="1_4fe8r"]
+[ext_resource type="Script" path="res://world/collectibles/life.gd" id="1_4fe8r"]
 [ext_resource type="Material" uid="uid://cxt5dg2s6g3cd" path="res://materials/life.tres" id="2_sdmcw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_yxb3t"]

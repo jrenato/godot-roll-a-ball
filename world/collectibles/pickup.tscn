@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bsi1pyviau8rv"]
 
-[ext_resource type="Script" path="res://levels/pickup.gd" id="1_fctsy"]
+[ext_resource type="Script" path="res://world/collectibles/pickup.gd" id="1_fctsy"]
 [ext_resource type="Material" uid="uid://osfbb5o4c8w8" path="res://materials/pickup.tres" id="2_l7u87"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4r14n"]

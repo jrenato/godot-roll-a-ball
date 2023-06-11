@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://df3um7c5ap3x4"]
 
-[ext_resource type="Script" path="res://levels/coil.gd" id="1_ib015"]
+[ext_resource type="Script" path="res://world/components/coil.gd" id="1_ib015"]
 [ext_resource type="Material" uid="uid://coa10hgapo2wn" path="res://materials/coil.tres" id="2_ahkqj"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_aaw5m"]
