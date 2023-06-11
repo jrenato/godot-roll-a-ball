@@ -33,6 +33,7 @@ func _ready() -> void:
 
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	continue_button.pressed.connect(_on_continue_button_pressed)
+	next_level_button.pressed.connect(_on_next_level_button_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 
 	spawn_position = position
@@ -188,6 +189,10 @@ func _on_restart_button_pressed() -> void:
 
 func _on_continue_button_pressed() -> void:
 	resume_game()
+
+
+func _on_next_level_button_pressed() -> void:
+	Signals.next_level.emit()
 
 
 func resume_game() -> void:

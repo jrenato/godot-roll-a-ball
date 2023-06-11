@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwedm00q73k3l"]
+[gd_scene load_steps=13 format=3 uid="uid://bwedm00q73k3l"]
 
+[ext_resource type="Script" path="res://world/levels/level.gd" id="1_mi5rx"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="1_skuub"]
 [ext_resource type="PackedScene" uid="uid://cj6vdaacylqfa" path="res://world/components/game_camera.tscn" id="2_36cfw"]
+[ext_resource type="PackedScene" uid="uid://dcs7vf55bn8my" path="res://world/levels/level_02.tscn" id="2_epugk"]
 [ext_resource type="PackedScene" uid="uid://bsi1pyviau8rv" path="res://world/collectibles/pickup.tscn" id="3_a1sx3"]
 [ext_resource type="MeshLibrary" uid="uid://mfw0gpq36pkm" path="res://world/prototype_tiles.tres" id="4_2jk4d"]
 [ext_resource type="PackedScene" uid="uid://cnawtbw7kwju7" path="res://world/components/death_area.tscn" id="5_r56o2"]
@@ -24,6 +26,8 @@ glow_enabled = true
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_16dkx"]
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_mi5rx")
+next_level = ExtResource("2_epugk")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_73pvt")

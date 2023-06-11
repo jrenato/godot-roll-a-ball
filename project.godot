@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Godot Roll-a-Ball"
-run/main_scene="res://world/levels/level_02.tscn"
+config/name="Sphericity"
+run/main_scene="res://ui/main_menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 

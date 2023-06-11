@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcs7vf55bn8my"]
+[gd_scene load_steps=19 format=3 uid="uid://dcs7vf55bn8my"]
 
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="1_aly73"]
+[ext_resource type="Script" path="res://world/levels/level.gd" id="1_lisjw"]
 [ext_resource type="PackedScene" uid="uid://cj6vdaacylqfa" path="res://world/components/game_camera.tscn" id="2_2cjl4"]
 [ext_resource type="PackedScene" uid="uid://bsi1pyviau8rv" path="res://world/collectibles/pickup.tscn" id="3_x1mw1"]
 [ext_resource type="MeshLibrary" uid="uid://mfw0gpq36pkm" path="res://world/prototype_tiles.tres" id="4_yrf7u"]
@@ -37,6 +38,7 @@ _data = {
 point_count = 2
 
 [node name="Level" type="Node3D"]
+script = ExtResource("1_lisjw")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_73pvt")

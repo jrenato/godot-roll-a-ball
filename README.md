@@ -47,8 +47,10 @@ After this, I'll start working on the next improvements:
 ### Low Priorities
 
 - [ ] Refactor the things I don't think belong to the `Player` script.
-- [ ] Add a main and settings menu.
-- [ ] Add a level selection menu and create more levels.
+- [x] Add a Main Menu. (details [here](docs/low-priorities.md#add-a-main-menu))
+- [ ] Add a Settings Menu.
+- [x] Add more levels. (details [here](docs/low-priorities.md#add-more-levels))
+- [ ] Add a level selection menu.
 - [x] Add lives to the player. (details [here](docs/low-priorities.md#add-lives-to-the-player))
 - [x] Pause other objects when the game is paused. (details [here](docs/low-priorities.md#pause-other-objects))
 - [x] Add a `Ramp` to create verticality on level design (details [here](docs/low-priorities.md#add-a-ramp-to-create-verticality-on-level-design))

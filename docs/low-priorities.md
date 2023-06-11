@@ -256,3 +256,99 @@ func set_defeat_screen() -> void:
 		continue_button.disabled = true
 	(...)
 ```
+
+## Add a Main Menu
+
+First I created a `main_menu.tscn` scene, and created the following scene tree:
+
+![Main Menu Scene Tree](images/main_menu_scene_tree.png)
+
+Then I tweaked the `Main Menu` nodes to make it look like this:
+
+![Main Menu Script](images/main_menu.png)
+
+And attached the following script to the `Main Menu` node:
+
+```gdscript
+extends CanvasLayer
+
+@onready var start_button = %StartButton
+@onready var options_button = %OptionsButton
+@onready var credits_button = %CreditsButton
+@onready var quit_button = %QuitButton
+
+func _ready():
+	start_button.grab_focus()
+
+	start_button.button_up.connect(_on_start_button_button_up)
+	options_button.button_up.connect(_on_options_button_button_up)
+	credits_button.button_up.connect(_on_credits_button_button_up)
+	quit_button.button_up.connect(_on_quit_button_button_up)
+
+func _on_start_button_button_up():
+	get_tree().change_scene_to_file("res://world/levels/level_01.tscn")
+
+func _on_options_button_button_up():
+	pass
+
+func _on_credits_button_button_up():
+	pass
+
+func _on_quit_button_button_up():
+	get_tree().quit()
+```
+
+## Add more Levels
+
+First I renamed the current level to `level_02.tscn`. Then I duplicated it and renamed the duplicate to `level_01.tscn`.
+
+I cleaned up a lot of stuff on the `level_01.tscn` scene, since it'll the first level and I want it to be as simple as possible.
+
+But having additional levels doesn't matter if the player can't access them. I needed a way to travel from level_01 to level_02 and so on.
+
+It would be more appropriate to have a Game Manager to handle the level transition, but to keep things simple for now, I'll just have the levels themselves handle the transitions.
+
+I needed a way for the Player to communicate with the level, signaling that the next level should be loaded. So there, I could use a signal.
+
+First I created a new custom signal on `signals.gd`:
+
+```gdscript
+extends Node
+
+signal game_paused(paused : bool)
+signal next_level() # <--- the new signal
+```
+
+Then I updated the `Player` script:
+
+```gdscript
+func _ready() -> void:
+	(...)
+	next_level_button.pressed.connect(_on_next_level_button_pressed)
+	(...)
+
+func _on_next_level_button_pressed() -> void:
+	Signals.next_level.emit()
+(...)
+```
+
+Then I needed a way for the level to listen to the signal, so I attached the following script, `level.gd`, to both levels:
+
+```gdscript
+extends Node3D
+
+@export var next_level : PackedScene
+
+func _ready() -> void:
+	Signals.next_level.connect(load_next_level)
+
+func load_next_level() -> void:
+	if next_level:
+		get_tree().change_scene_to_packed(next_level)
+```
+
+The variable `next_level` is a `PackedScene` that will be used to load the next level, so I also had to drag the `level_02.tscn` scene to the `next_level` property on the `level_01.tscn` scene.
+
+Since there's no `next_level` for `level_02.tscn`, I left the property empty, and the `load_next_level` method will just do nothing.
+
+And that's it. Now the player can travel from level to level. Hackish, I know, but it works.
