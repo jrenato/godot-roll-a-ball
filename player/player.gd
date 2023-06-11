@@ -176,13 +176,6 @@ func _on_restart_button_pressed() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	if lives <= 0:
-		return
-
-	lives -= 1
-
-	set_lives_text()
-
 	Signals.game_paused.emit(false)
 
 	mesh_instance.visible = true
@@ -193,6 +186,12 @@ func _on_continue_button_pressed() -> void:
 	freeze = false
 
 	if player_dead:
+		if lives <= 0:
+			return
+
+		lives -= 1
+		set_lives_text()
+
 		position = spawn_position
 		linear_velocity = Vector3.ZERO
 		player_dead = false
