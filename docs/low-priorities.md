@@ -228,13 +228,14 @@ So I needed to update the `_on_continue_button_pressed` method:
 
 ```gdscript
 func _on_continue_button_pressed() -> void:
-	if lives <= 0:
-		return
-
-	lives -= 1
-
-	set_lives_text()
 	(...)
+	if player_dead:
+		if lives <= 0:
+			return
+
+		lives -= 1
+		set_lives_text()
+		(...)
 ```
 
 If the player has no lives left, the method just returns. Otherwise, it decreases the lives count by one, updates the `LivesLabel` and then proceeds as before.
