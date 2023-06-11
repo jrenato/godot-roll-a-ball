@@ -38,7 +38,7 @@ After this, I'll start working on the next improvements:
 - [x] Have the `Player` be destroyed when it falls off the level (details [here](docs/medium-priorities.md#player-death-and-respawn))
 - [x] Add an win/lose screen with options to restart and exit the game. (details [here](docs/medium-priorities.md#losing-and-restarting-the-level))
 - [x] Add a pause menu with options to restart the game and exit the game. (details [here](docs/medium-priorities.md#adding-a-pause-menu))
-- [ ] Add another type of pickup.
+- [x] Add another type of pickup. (details [here](docs/medium-priorities.md#life-pickup))
 - [x] Add visual effects to the `Player` when it's destroyed. (details [here](docs/medium-priorities.md#animate-player-death))
 - [x] Add visual effects to the `Pickup` when it's collected. (details [here](docs/medium-priorities.md#animate-pickup-collected))
 - [x] Improve the `Pickup` visuals with Particles and Glow. (details [here](docs/medium-priorities.md#improve-pickup-visuals))

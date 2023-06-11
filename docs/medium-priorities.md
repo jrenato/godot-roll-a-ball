@@ -644,3 +644,42 @@ func _on_continue_button_pressed() -> void:
 And that's it. The pause menu is now working as expected.
 
 It's a little hacky, but it works. I plan to refactor it later, when I separate the `HUD` into its own scene. With a proper respawn system, both the `player_dead` and `last_velocity` variables will be obsolete (we won't use `freeze` anymore).
+
+## Life Pickup
+
+To start, I created an `Area3D` scene and a `CollisionShape` child. I also added a `MeshInstance` with a `Sphere` mesh, and another `MeshInstance` with a `Torus` mesh. The idea is to make the `Torus` mesh rotate around the `Sphere` mesh, to make it look like a `Life` pickup.
+
+I copied and pasted the Particles and OmniLight from the `Pickup` scene, and changed their colors to a more bluish tone. I also set a bluish material to the `Sphere` and `Torus` meshes.
+
+Then I added an `AnimationPlayer` node, and created a new animation called `idle`. In the tracks, I made the `Sphere` mesh move slightly up and down, and made the `Torus` mesh rotate around the `Sphere` mesh.
+
+Finally, I added the root node to the `lives` group, and saved the scene as `life.tscn` and attached script to it, `life.gd`.
+
+```gdscript
+extends Area3D
+@onready var animation_player = %AnimationPlayer
+
+func _ready():
+	Signals.game_paused.connect(_on_game_paused)
+
+func _on_game_paused(paused : bool) -> void:
+	if paused:
+		animation_player.pause()
+	else:
+		animation_player.play()
+```
+
+That way, the `Life` pickup will stop animating when the game is paused.
+
+To have the player gain a life when picking up the `Life` pickup, updated `_on_area_entered` on the `player.gd` script:
+
+```gdscript
+func _on_area_entered(body : Node) -> void:
+	(...)
+	if body.is_in_group("lives"):
+		lives += 1
+		set_lives_text()
+		tween_capture(body)
+```
+
+And that's it. The `Life` pickup is now working as expected.

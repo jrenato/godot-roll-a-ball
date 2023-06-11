@@ -8,7 +8,7 @@ Suggestions checklist:
   * Add obstacles
     - [x] Damaging Wall and Floor
   * New collectibles
-    - [ ] Orbs for extra lives
+    - [x] Orbs for extra lives
 
 * You learned how to use triggers to collect items.
   * Try using them to trigger something else

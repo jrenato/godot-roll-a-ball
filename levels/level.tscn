@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dcs7vf55bn8my"]
+[gd_scene load_steps=18 format=3 uid="uid://dcs7vf55bn8my"]
 
 [ext_resource type="PackedScene" uid="uid://cj6vdaacylqfa" path="res://levels/game_camera.tscn" id="1_h056d"]
 [ext_resource type="PackedScene" uid="uid://cnxvofx5vjmby" path="res://player/player.tscn" id="2_ysrin"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b6wcr4ea5u3l3" path="res://levels/damage_floor.tscn" id="9_c83a1"]
 [ext_resource type="PackedScene" uid="uid://buhf0vw8rv2ag" path="res://levels/damage_wall.tscn" id="10_cir0u"]
 [ext_resource type="PackedScene" uid="uid://busw8a0jiungq" path="res://levels/moving_platform.tscn" id="11_wgoih"]
+[ext_resource type="PackedScene" uid="uid://b55i8aqt1iaul" path="res://levels/life.tscn" id="12_2d278"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8oxga"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -143,9 +144,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 2.5, -36)
 
 [node name="Pickup37" parent="Pickups" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 2.5, -42)
-
-[node name="Pickup49" parent="Pickups" instance=ExtResource("5_fhwg8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 10.5, -59)
 
 [node name="Pickup38" parent="Pickups" instance=ExtResource("5_fhwg8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 2.5, -42)
@@ -354,3 +352,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57, 0, 1)
 curve = SubResource("Curve3D_m3p5f")
 speed = 3
+
+[node name="Life" parent="." instance=ExtResource("12_2d278")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.263, 10.5, -58.765)

@@ -160,6 +160,11 @@ func _on_area_entered(body : Node) -> void:
 		set_count_text()
 		tween_capture(body)
 
+	if body.is_in_group("lives"):
+		lives += 1
+		set_lives_text()
+		tween_capture(body)
+
 	if body.is_in_group("death_areas"):
 		player_dead = true
 		set_defeat_screen()
