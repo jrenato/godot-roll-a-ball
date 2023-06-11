@@ -1,15 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6wcr4ea5u3l3"]
+[gd_scene load_steps=4 format=3 uid="uid://b6wcr4ea5u3l3"]
 
 [ext_resource type="Material" uid="uid://cwcs23yo6s6iq" path="res://materials/damage_surface.tres" id="1_rsh7f"]
-[ext_resource type="Material" uid="uid://cneds21ilcng1" path="res://materials/spike.tres" id="2_hp3lg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gr50r"]
 size = Vector3(2, 0.1, 2)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_3mj2g"]
-top_radius = 0.001
-bottom_radius = 0.08
-height = 0.2
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tq04i"]
 data = PackedVector3Array(-1, 0.05, 1, 1, 0.05, 1, -1, -0.05, 1, 1, 0.05, 1, 1, -0.05, 1, -1, -0.05, 1, 1, 0.05, -1, -1, 0.05, -1, 1, -0.05, -1, -1, 0.05, -1, -1, -0.05, -1, 1, -0.05, -1, 1, 0.05, 1, 1, 0.05, -1, 1, -0.05, 1, 1, 0.05, -1, 1, -0.05, -1, 1, -0.05, 1, -1, 0.05, -1, -1, 0.05, 1, -1, -0.05, -1, -1, 0.05, 1, -1, -0.05, 1, -1, -0.05, -1, 1, 0.05, 1, -1, 0.05, 1, 1, 0.05, -1, -1, 0.05, 1, -1, 0.05, -1, 1, 0.05, -1, -1, -0.05, 1, 1, -0.05, 1, -1, -0.05, -1, 1, -0.05, 1, 1, -0.05, -1, -1, -0.05, -1)
@@ -17,62 +11,6 @@ data = PackedVector3Array(-1, 0.05, 1, 1, 0.05, 1, -1, -0.05, 1, 1, 0.05, 1, 1, 
 [node name="DamageFloor" type="MeshInstance3D"]
 mesh = SubResource("BoxMesh_gr50r")
 surface_material_override/0 = ExtResource("1_rsh7f")
-
-[node name="Spikes" type="Node3D" parent="."]
-
-[node name="Spike" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.15, -0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike2" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, -0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike3" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.15, -0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike4" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.15, 0)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike5" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike6" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.15, 0)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike7" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.15, 0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike8" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
-
-[node name="Spike9" type="MeshInstance3D" parent="Spikes"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0.15, 0.6)
-mesh = SubResource("CylinderMesh_3mj2g")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_hp3lg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." groups=["damage"]]
 
